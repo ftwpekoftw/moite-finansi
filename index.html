@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Моите финанси</title>
+  <meta name="theme-color" content="#0f766e">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Финанси">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/"><img src="icon.svg" alt="" width="28" height="28"><span>Моите финанси</span></a>
+      <nav class="tabs" aria-label="Основна навигация">
+        <a href="#/" data-route="dashboard">Табло</a>
+        <a href="#/month" data-route="month">Месец</a>
+        <a href="#/loans" data-route="loans">Кредити</a>
+        <a href="#/settings" data-route="settings">Настройки</a>
+      </nav>
+      <div class="month-picker" id="monthPicker">
+        <button type="button" class="icon-btn" data-action="month-prev" aria-label="Предишен месец">‹</button>
+        <button type="button" class="month-label" data-action="month-today" id="monthLabel" title="Към текущия месец"></button>
+        <button type="button" class="icon-btn" data-action="month-next" aria-label="Следващ месец">›</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="view" class="container" aria-live="polite"></main>
+
+  <button type="button" class="fab" data-action="new-expense" aria-label="Нов разход" title="Нов разход (клавиш N)">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+  </button>
+
+  <nav class="bottom-nav" aria-label="Навигация">
+    <a href="#/" data-route="dashboard">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 4v4h6V4z"/></svg><span>Табло</span>
+    </a>
+    <a href="#/month" data-route="month">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M9 3v4M15 3v4"/></svg><span>Месец</span>
+    </a>
+    <span class="bottom-gap" aria-hidden="true"></span>
+    <a href="#/loans" data-route="loans">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>Кредити</span>
+    </a>
+    <a href="#/settings" data-route="settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span>Настройки</span>
+    </a>
+  </nav>
+
+  <dialog id="sheet" class="sheet"></dialog>
+  <dialog id="confirm" class="sheet sheet-small"></dialog>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="lib/sql-wasm.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
