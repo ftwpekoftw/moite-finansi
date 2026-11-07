@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Финанси β</title>
+  <meta name="theme-color" content="#07170d">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Финанси β">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script>
+    // Цветът на фона (избран в Настройки) — прилага се преди да се покаже страницата, без премигване.
+    try { const bg = localStorage.getItem('bg'); if (bg) document.documentElement.dataset.bg = JSON.parse(bg); } catch (e) { /* по избор */ }
+  </script>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/" aria-label="Начало"><img src="icon.svg" alt="" width="36" height="36"></a>
+      <div class="month-picker" id="monthPicker">
+        <button type="button" class="icon-btn" data-action="month-prev" aria-label="Предишен месец">‹</button>
+        <button type="button" class="month-label" data-action="month-today" id="monthLabel" title="Към текущия месец"></button>
+        <button type="button" class="icon-btn" data-action="month-next" aria-label="Следващ месец">›</button>
+      </div>
+      <a class="icon-btn" href="#/settings" data-route="settings" aria-label="Настройки">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="view" class="container" aria-live="polite"></main>
+
+  <button type="button" class="fab" data-action="new-expense" aria-label="Нов разход" title="Нов разход (клавиш N)">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+  </button>
+
+  <nav class="bottom-nav" aria-label="Навигация">
+    <a href="#/" data-route="dashboard">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>Начало</span>
+    </a>
+    <a href="#/month" data-route="month">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M9 3v4M15 3v4"/></svg><span>Месец</span>
+    </a>
+    <span class="bottom-gap" aria-hidden="true"></span>
+    <a href="#/loans" data-route="loans">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>Кредити</span>
+    </a>
+    <a href="#/funds" data-route="funds">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/><circle cx="12" cy="12" r="1"/></svg><span>Фондове</span>
+    </a>
+  </nav>
+
+  <dialog id="sheet" class="sheet"></dialog>
+  <dialog id="confirm" class="sheet sheet-small"></dialog>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="lib/sql-wasm.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
